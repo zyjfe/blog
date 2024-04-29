@@ -1,0 +1,10 @@
+.container {
+
+  :global(.backstage-button-primary) {
+    --backstage-color-primary: #234332;
+  }
+  
+  .btn {
+    background-color: red;
+  }
+}

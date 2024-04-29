@@ -1,6 +1,6 @@
 import { BlogPosts } from 'app/components/posts'
 
-export default function Page() {
+function Page() {
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
@@ -19,3 +19,5 @@ export default function Page() {
     </section>
   )
 }
+
+export default Page;
