@@ -9,9 +9,10 @@ import { baseUrl } from './sitemap'
 import StoreProvider from './StoreProvider';
 import Layout from '@zx/backstage-components/dist/Layout.min';
 import '@zx/backstage-components/dist/Layout.min.css';
-import { Navbar } from './components/nav'
+import { Navbar, NavMenu } from './components/nav'
 import Header from './components/Header'
 import styles from './index.module.scss';
+import { getBlogPosts } from 'app/blog/utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -48,6 +49,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  
+  const allBlogs = getBlogPosts();
+
+  const posts = allBlogs.sort((a, b) => {
+    if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+      return -1;
+    } 
+    return 1;
+  }).map((post, index) => (
+    {
+      label: post.metadata.title,
+      key: `group-menu-${index}`
+    }
+  ));
+
   return (
     <StoreProvider>
       <html
@@ -66,7 +82,7 @@ export default function RootLayout({
             </Layout.Header>
             <Layout sider>
               <Layout.Sider>
-                <Navbar/>
+                <NavMenu posts={posts}/>
               </Layout.Sider>
               <Layout.Content>
               {children}
