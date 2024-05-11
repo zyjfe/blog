@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 import RcMenu from 'rc-menu/lib';
 import "rc-menu/assets/index.css";
 
@@ -55,11 +56,19 @@ export function Navbar() {
 }
 
 export function NavMenu(props) {
-  
+  const router = useRouter();
+
   const { posts } = props;
 
   return <div>
     <RcMenu
+      onClick={(info) => {
+        const index = info.key.replace("group-menu-", "");
+        const intIndex = parseInt(index);
+        if (intIndex < 0 || intIndex > posts.length - 1) return;
+        const post = posts[intIndex];
+        router.push(`/blog/${post.slug}`)
+      }}
       mode="inline"
       items={[
         {
@@ -75,6 +84,25 @@ export function NavMenu(props) {
           // key: 'team',
           type: "group",
           children: posts,
+        },
+        {
+          label: '专项产出',
+          // key: "sub",
+          type: "group",
+          children: [{
+            label: 'React',
+            key: 'react',
+            children: [{
+              label: 'JSX',
+              key: 'jsx',
+            }, {
+              label: 'Hooks',
+              key: 'hooks',
+            }]
+          }, {
+            label: 'Webpack',
+            key: 'webpack',
+          }]
         }
       ]}
     />

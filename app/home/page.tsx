@@ -19,7 +19,7 @@ function Home(props) {
   const { name, count } = props;
   return (
     <>
-    <Layout title="测试" style={{height: 1000}}>
+      <Layout title="测试" style={{height: 1000}}>
       <Layout.Header>Header</Layout.Header>
       <Layout.Content>Content</Layout.Content>
       <Layout.Footer>Footer</Layout.Footer>

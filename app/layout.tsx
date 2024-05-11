@@ -60,7 +60,8 @@ export default function RootLayout({
   }).map((post, index) => (
     {
       label: post.metadata.title,
-      key: `group-menu-${index}`
+      key: `group-menu-${index}`,
+      ...post,
     }
   ));
 
